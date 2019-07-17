@@ -22,7 +22,6 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 		String sheetName=testName.substring(testName.indexOf("_")+1)+"_TestCase";
 		TestUtils.setTestResultExcel(sheetName, testName, "PASS", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
 		test.log(Status.PASS, testName.toUpperCase()+" is PASSED");
-		System.out.println("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
 		extent.flush();     //If test passes, TestNG marks it as passed
 	
 	}
