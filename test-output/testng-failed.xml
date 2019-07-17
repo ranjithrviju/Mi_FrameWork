@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <listeners>
+    <listener class-name="listeners.CustomListeners"/>
+  </listeners>
+  <test thread-count="5" name="Test(failed)">
+    <parameter name="browser" value="Chrome"/>
+    <classes>
+      <class name="testcases.LoginToSmartProp">
+        <methods>
+          <include name="navigateTo_MasterReport" invocation-numbers="0 0 0 0 1 1"/>
+          <include name="openApplication"/>
+          <include name="closebrowser"/>
+          <include name="initialize"/>
+        </methods>
+      </class> <!-- testcases.LoginToSmartProp -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

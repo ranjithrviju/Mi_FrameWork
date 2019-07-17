@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="26838" started-at="2019-07-17T13:24:42Z" finished-at="2019-07-17T13:25:09Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="26838" started-at="2019-07-17T13:24:42Z" finished-at="2019-07-17T13:25:09Z">
+      <class name="testcases.LoginToSmartProp">
+        <test-method status="PASS" signature="initialize()[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="initialize" is-config="true" duration-ms="5" started-at="2019-07-17T13:24:42Z" finished-at="2019-07-17T13:24:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method status="PASS" signature="openApplication(java.lang.String)[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="openApplication" is-config="true" duration-ms="8610" started-at="2019-07-17T13:24:43Z" finished-at="2019-07-17T13:24:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openApplication -->
+        <test-method status="PASS" signature="navigateTo_MasterReport(java.util.Hashtable)[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="navigateTo_MasterReport" duration-ms="3729" started-at="2019-07-17T13:24:52Z" data-provider="getData" finished-at="2019-07-17T13:24:55Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Username=Rajaram.Karri1, Password=P@ssword1}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateTo_MasterReport -->
+        <test-method status="PASS" signature="closebrowser()[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="closebrowser" is-config="true" duration-ms="800" started-at="2019-07-17T13:24:56Z" finished-at="2019-07-17T13:24:57Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closebrowser -->
+        <test-method status="PASS" signature="openApplication(java.lang.String)[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="openApplication" is-config="true" duration-ms="8006" started-at="2019-07-17T13:24:57Z" finished-at="2019-07-17T13:25:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openApplication -->
+        <test-method status="PASS" signature="navigateTo_MasterReport(java.util.Hashtable)[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="navigateTo_MasterReport" duration-ms="3579" started-at="2019-07-17T13:25:05Z" data-provider="getData" finished-at="2019-07-17T13:25:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Username=Rajaram.Karri1, Password=P@ssword1}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateTo_MasterReport -->
+        <test-method status="PASS" signature="closebrowser()[pri:0, instance:testcases.LoginToSmartProp@3d8314f0]" name="closebrowser" is-config="true" duration-ms="736" started-at="2019-07-17T13:25:09Z" finished-at="2019-07-17T13:25:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closebrowser -->
+      </class> <!-- testcases.LoginToSmartProp -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
