@@ -12,6 +12,9 @@ public class CommonMethods extends CommonClass{
 	private static Logger log=Logger.getLogger("Common Methods");
 	private  WebElement ele;
 	private JavascriptExecutor js=(JavascriptExecutor) driver;
+	
+	//-----------------------------------------------------------------------------------------CLICK()-----------------------------------------------------------------------------------------------------------------//
+	
 	public  void clickEle(String locator) {
 		try {
 			ele=getElement(locator);
@@ -22,6 +25,9 @@ public class CommonMethods extends CommonClass{
 			log.info("Failed to Click on  "+locator+" :    "+e.getMessage());
 		}
 	}
+	
+	//---------------------------------------------------------------------------------SENDKEYS()-----------------------------------------------------------------------------------------------------------------//
+	
 	public void enterText(String locator, String data) {
 		try {
 			ele=getElement(locator);
@@ -32,6 +38,9 @@ public class CommonMethods extends CommonClass{
 			log.info("Failed to enter text in "+locator+" :    "+e.getMessage());
 		}
 	}
+	
+	//---------------------------------------------------------------------------------MOVE TO ELEMENT()-----------------------------------------------------------------------------------------------------------------//
+	
 	public void mouseHover(WebDriver driver, String locator) {
 		try {
 			Actions act=new Actions(driver);
@@ -43,6 +52,8 @@ public class CommonMethods extends CommonClass{
 		}
 	}
 	
+	//---------------------------------------------------------------------------------DATE SELECTER-----------------------------------------------------------------------------------------------------------------//
+	
 	public String datePicker(int days) {
 		String datePick=null;
 		LocalDate now = LocalDate.now();
@@ -52,11 +63,16 @@ public class CommonMethods extends CommonClass{
 		return datePick ;
 	}
 	
+	//---------------------------------------------------------------------------------SELECT CLASS-----------------------------------------------------------------------------------------------------------------//
+	
 	public Select dropDown(String locator) {
 		Select s = new Select(getElement(locator));
 		log.info("Created object of drop down "+locator);
 		return s;
 	}
+	
+	//---------------------------------------------------------------------------------GET FIRST SELECTED OPTION-----------------------------------------------------------------------------------------------------------------//
+	
 	public String getFirstSelectedItem(String locator) {
 		String option=null;
 		Select s = new Select(getElement(locator));
@@ -64,11 +80,16 @@ public class CommonMethods extends CommonClass{
 		return option;
 	}
 	
+	//---------------------------------------------------------------------------------JAVASCRIPT CLICK-----------------------------------------------------------------------------------------------------------------//
+	
 	public void javaScriptClick(String locator) {
 		js.executeScript("arguments[0].click()", getElement(locator));
 		log.info("Clickin on "+locator);
 		test.log(Status.INFO, "Click on "+locator);
 	}
+	
+	//---------------------------------------------------------------------------------JAVASCRIPT ENTER TEXT-----------------------------------------------------------------------------------------------------------------//
+	
 	public void javaScriptEnterText(String locator,String data) {
 		js.executeScript("arguments[0].value='"+data+"'", getElement(locator));
 		log.info("Entered "+data+" in "+locator);
