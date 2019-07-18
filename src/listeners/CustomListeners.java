@@ -1,17 +1,10 @@
 package listeners;
 import org.testng.IClassListener;
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ITest;
 import org.testng.ITestClass;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
-import org.testng.ITestNGListener;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.SkipException;
-import org.testng.internal.annotations.IBeforeMethod;
-import org.testng.internal.annotations.IBeforeTest;
 import com.aventstack.extentreports.Status;
 import generic.CommonClass;
 import utilities.ExcelUtility;

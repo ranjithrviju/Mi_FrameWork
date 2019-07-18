@@ -10,7 +10,7 @@ import utilities.ExcelUtility;
 import utilities.TestUtils;
 
 public class Retry extends CommonClass implements IRetryAnalyzer {
-	private Logger log=Logger.getLogger("Retry");
+	private Logger log=Logger.getLogger("RetryAnalyzer");
 	private int count = 0;
 	private static int maxTry = 2;
 	@Override
