@@ -38,9 +38,9 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING ROW COUNT------------------------------------------------------------------------------------------------------------------------//
 	
 	public int getRowCount(String sheetName) {
+		System.out.println("Row count sheetName is : "+sheetName);
 		int rowCount=0;
 		try {
-			System.out.println("Get row count sheetname : "+sheetName);
 			rowCount=wb.getSheet(sheetName).getLastRowNum();
 			log.info("The number of Rows : "+rowCount);
 		} catch (Exception e) {

@@ -5,6 +5,7 @@ import java.util.List;
 public class FromExcel {
 	
 	//--------------------------------------------------------------TO GET LIST OF DATA FROM EXCEL-------------------------------------------------------------------------------------------------//
+	
 	public static List<String> getDataFromExcel(String testCaseName, String sheetName) {
 		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+"\\excel\\data.xlsx");
 		int totalRows = excel.getRowCount(sheetName);

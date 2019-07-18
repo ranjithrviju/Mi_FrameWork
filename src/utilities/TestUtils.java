@@ -126,6 +126,7 @@ public class TestUtils extends CommonClass {
 		boolean isRunnable=false;
 		String sheet=sheetName;
 		for (int i = 1; i < excel.getRowCount(sheet); i++) {
+			System.out.println("Getrowcount : "+excel.getCellValue(sheet, "TestCaseID", i));
 			if(excel.getCellValue(sheet, "TestCaseID", i).equalsIgnoreCase(testCaseName)) {
 				if(excel.getCellValue(sheet, "RunMode", i).equals("YES")) {
 					isRunnable=true;
