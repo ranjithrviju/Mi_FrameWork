@@ -30,7 +30,6 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 					e.printStackTrace();
 				}
 				extent.flush();
-			
 				//If maxCount reached,test marked as failed
 			}
 		} else {
