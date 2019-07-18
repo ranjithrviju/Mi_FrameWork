@@ -23,6 +23,7 @@ public class CommonMethods extends CommonClass{
 			test.log(Status.INFO, "Click on "+locator);
 		} catch (Exception e) {
 			log.info("Failed to Click on  "+locator+" :    "+e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -36,6 +37,7 @@ public class CommonMethods extends CommonClass{
 			test.log(Status.INFO, "Enter "+data+" in "+locator);
 		} catch (Exception e) {
 			log.info("Failed to enter text in "+locator+" :    "+e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -49,6 +51,7 @@ public class CommonMethods extends CommonClass{
 			test.log(Status.INFO, "Mouse Hover on "+locator);
 		} catch (Exception e) {
 			log.info("Cannot Mouse Hover to +"+locator+" :    "+e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

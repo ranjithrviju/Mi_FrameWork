@@ -1,15 +1,17 @@
 package utilities;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class FromExcel {
+	private static Logger log=Logger.getLogger("From Excel");
 	
 	//--------------------------------------------------------------TO GET LIST OF DATA FROM EXCEL-------------------------------------------------------------------------------------------------//
 	
 	public static List<String> getDataFromExcel(String testCaseName, String sheetName) {
 		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+"\\excel\\data.xlsx");
 		int totalRows = excel.getRowCount(sheetName);
-		System.out.println("Total Rows in the Excel File is : "+totalRows);
+		log.info("Total Rows in the Excel File is : "+totalRows);
 
 		//--------------------Finding TestCase----------------------------//
 
@@ -19,7 +21,7 @@ public class FromExcel {
 			if(testCase.equals(testCaseName))
 				break;
 		}
-		System.out.println("The row number of test case "+testCaseName+" is : "+testCaseRow);
+		log.info("The row number of test case "+testCaseName+" is : "+testCaseRow);
 
 		//---------------Finding number of rows in TestCase----------------//
 
@@ -28,7 +30,7 @@ public class FromExcel {
 		while(!excel.getCellValue(sheetName, dataRowStart+rows, 0).equals("")) {
 			rows++;
 		}
-		System.out.println("Total Number of rows of data in TestCase : "+rows);
+		log.info("Total Number of rows of data in TestCase : "+rows);
 
 		//----------------Finding number of columns in TestCase---------------------//
 
@@ -37,7 +39,7 @@ public class FromExcel {
 		while(!excel.getCellValue(sheetName, dataColStart, cols).equals("")) {
 			cols++;
 		}
-		System.out.println("Total Number of columns in TestCase : "+cols);
+		log.info("Total Number of columns in TestCase : "+cols);
 
 		//---------------------Getting the data of TestCase------------------//
 

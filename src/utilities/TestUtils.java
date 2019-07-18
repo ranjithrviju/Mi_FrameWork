@@ -3,6 +3,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Hashtable;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,7 @@ import com.google.common.io.Files;
 import generic.CommonClass;
 
 public class TestUtils extends CommonClass {
+	private static Logger log=Logger.getLogger("TestUtils");
 	public static String screenshotPath;
 	private static ExtentReports extent;
 	private static ExtentHtmlReporter rep;
@@ -23,12 +25,9 @@ public class TestUtils extends CommonClass {
 	@BeforeTest
 	@DataProvider(name="getData")
 	public static Object[][] getData(Method m) {
-
 		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path"));
 		String testCaseName=m.getName();
-		System.out.println("Sheet Name is : "+excelPro.getProperty("sheetName"));
 		int totalRows = excel.getRowCount(excelPro.getProperty("sheetName"));
-		System.out.println("Total Rows in the Excel File is : "+totalRows);
 
 		//----------Finding TestCase-----------//
 
@@ -38,7 +37,6 @@ public class TestUtils extends CommonClass {
 			if(testCase.equals(testCaseName))
 				break;
 		}
-		System.out.println("The row number of test case "+testCaseName+" is : "+testCaseRow);
 
 		//-----------Finding number of rows in TestCase---------//
 
@@ -47,7 +45,6 @@ public class TestUtils extends CommonClass {
 		while(!excel.getCellValue(excelPro.getProperty("sheetName"), dataRowStart+rows, 0).equals("")) {
 			rows++;
 		}
-		System.out.println("Total Number of rows of data in TestCase : "+rows);
 
 		//-----------Finding number of columns in TestCase---------------//
 
@@ -56,7 +53,6 @@ public class TestUtils extends CommonClass {
 		while(!excel.getCellValue(excelPro.getProperty("sheetName"), dataColStart, cols).equals("")) {
 			cols++;
 		}
-		System.out.println("Total Number of columns in TestCase : "+cols);
 
 		//-------------Getting the data of TestCase-------------------//
 
@@ -66,7 +62,6 @@ public class TestUtils extends CommonClass {
 			Hashtable<String, String> table = new Hashtable<String, String>();
 			for (int col = 0; col < cols; col++) {
 				String value = excel.getCellValue(excelPro.getProperty("sheetName"), row, col);
-				System.out.println(value);
 				String column = excel.getCellValue(excelPro.getProperty("sheetName"), dataColStart, col);
 				table.put(column, value);
 			}
@@ -82,26 +77,27 @@ public class TestUtils extends CommonClass {
 		String date_time = new Date().toString().replaceAll(":", "_").replaceAll(" ", "_");
 		screenshotPath=System.getProperty("user.dir")+"\\resources\\ScreenShots\\"+testCaseName.toUpperCase()+date_time+".png";
 		try {
+			log.info("Capturing Screenshot");
 			TakesScreenshot ss = (TakesScreenshot) driver;
 			File srcFile = ss.getScreenshotAs(OutputType.FILE);     
 			Files.copy(srcFile, new File(screenshotPath));
 		} catch (Exception e) {
+			log.error("Failed to capture Screenshot");
+			e.printStackTrace();
 		}
 	}
 
 	//---------------------------------------------------------SET DATA RESULT IN EXCEL-------------------------------------------------------------------------------------------------------------------//
 
 	public static void setTestResultExcel(String sheetName,String testCaseName,String data, ExcelUtility excel) {
-		System.out.println("Inside setTestResultExcel");
 		try {
 			for (int i = 1; i <= excel.getRowCount(sheetName); i++) {
-				System.out.println("TestCase : "+excel.getCellValue(sheetName, "TestCaseID", i));
-				System.out.println(data+"------------"+testCaseName);
 				if(excel.getCellValue(sheetName, "TestCaseID", i).equalsIgnoreCase(testCaseName)) {
 					excel.setCellValue(sheetName, "Status", i, data);
 				}
 			}
 		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -126,7 +122,6 @@ public class TestUtils extends CommonClass {
 		boolean isRunnable=false;
 		String sheet=sheetName;
 		for (int i = 1; i < excel.getRowCount(sheet); i++) {
-			System.out.println("Getrowcount : "+excel.getCellValue(sheet, "TestCaseID", i));
 			if(excel.getCellValue(sheet, "TestCaseID", i).equalsIgnoreCase(testCaseName)) {
 				if(excel.getCellValue(sheet, "RunMode", i).equals("YES")) {
 					isRunnable=true;

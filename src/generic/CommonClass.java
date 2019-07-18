@@ -129,40 +129,30 @@ public class CommonClass implements IConstants {
 		if(browser.equals("Chrome")) {
 			System.setProperty(chromeKey, chromePath);
 			driver=new ChromeDriver();
-			log.error("Launching the "+browser+" browser");
+			log.info("Launching the "+browser+" browser");
 			test.info("Launching the "+browser+" browser");
 			driverWait=new WebDriverWait(driver, exwait);
 		}
 		else if(browser.equals("Firefox")) {
 			System.setProperty(fireFoxKey, fireFoxPAth);
 			driver=new FirefoxDriver();
-			log.error("Launching the "+browser+" browser");
+			log.info("Launching the "+browser+" browser");
 			test.info("Launching the "+browser+" browser");
 			driverWait=new WebDriverWait(driver, exwait);
 		}
 		driver.manage().window().maximize();
 		driver.get(config.getProperty("url"));
-		log.error("Navigating to "+config.getProperty("url"));
+		log.info("Navigating to "+config.getProperty("url"));
 		test.info("Navigating to "+config.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(wait, TimeUnit.SECONDS);
-	}
-
-	//---------------------------------------------------CHECKING THE RUNMODE OF TESTCASE--------------------------------------------------------------------------------------------------------//
-//	@BeforeTest
-	public static void checkRunMode(Method method){
-		String testname = method.getName();
-		String sheetName=testname.substring(testname.indexOf("_")+1)+"_TestCase";
-		log.info("Checking the Runmode of : "+testname);
-		if(!TestUtils.isTestCaseRunnable(sheetName, testname,new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")))) {
-			closebrowser();
-			throw new SkipException("Skipped the test case "+testname.toUpperCase()+" as the RunMode is No");
-		}
 	}
 
 	//-------------------------------------------------------------------CLOSING THE BROWSER------------------------------------------------------------------------------------------------------------------//
 	@AfterMethod
 	public static void closebrowser() {
 		if(driver!=null) {
+			log.info("Closing Browser");
+			test.info("Closing Browser");
 			driver.quit();
 		}
 	}

@@ -38,7 +38,6 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING ROW COUNT------------------------------------------------------------------------------------------------------------------------//
 	
 	public int getRowCount(String sheetName) {
-		System.out.println("Row count sheetName is : "+sheetName);
 		int rowCount=0;
 		try {
 			rowCount=wb.getSheet(sheetName).getLastRowNum();
@@ -67,6 +66,7 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING DATA FROM EXCEL------------------------------------------------------------------------------------------------------------------------//
 	
 	public String getCellValue(String sheetName, String colName,int rowNo) {
+		log.info("Getting the data from  sheet : "+sheetName+" and from column : "+colName);
 		int colNo=0;
 		String cellValue =null;
 		try {
@@ -96,6 +96,8 @@ public class ExcelUtility {
 			else
 				 return String.valueOf(cell.getBooleanCellValue());
 		} catch (Exception e) {
+			log.error("Failed to get data fromsheet : "+sheetName+" and from column : "+colName );
+			e.printStackTrace();
 		}
 		return cellValue;
 	}
@@ -103,6 +105,7 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING DATA FROM EXCEL------------------------------------------------------------------------------------------------------------------------//
 	
 	public String getCellValue(String sheetName, int rowNo,int colNo) {
+		log.info("Getting the data from  sheet : "+sheetName);
 		String cellValue =null;
 		try {
 			sheet = wb.getSheet(sheetName);
@@ -124,6 +127,8 @@ public class ExcelUtility {
 			else
 				 return String.valueOf(cell.getBooleanCellValue());
 		} catch (Exception e) {
+			log.error("Failed to get data fromsheet : "+sheetName );
+			e.printStackTrace();
 		}
 
 		return cellValue;
@@ -156,10 +161,11 @@ public class ExcelUtility {
 			wb.write(fos);
 			fos.close();
 		} catch (Exception e) {
+			log.error("Failed to write data("+data+") in to sheet : "+sheetName);
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println("Data Written");
+		log.info("Data written in to Excel");
 		return true;
 	}
 }
