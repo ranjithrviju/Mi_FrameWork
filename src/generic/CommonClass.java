@@ -148,6 +148,7 @@ public class CommonClass implements IConstants {
 	}
 
 	//-------------------------------------------------------------------CLOSING THE BROWSER------------------------------------------------------------------------------------------------------------------//
+	
 	@AfterMethod
 	public static void closebrowser() {
 		if(driver!=null) {
