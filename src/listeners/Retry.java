@@ -9,7 +9,7 @@ import utilities.TestUtils;
 
 public class Retry extends CommonClass implements IRetryAnalyzer {
 	private int count = 0;
-	private static int maxTry = 3;
+	private static int maxTry = 2;
 	@Override
 	public boolean retry(ITestResult result) {
 		if (!result.isSuccess()) {                      //Check if test not succeed
