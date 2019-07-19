@@ -23,9 +23,7 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 	}
 
 	public void onTestFailure(ITestResult result) {
-
 	}
-
 	public void onTestSkipped(ITestResult result) {
 		
 	}
