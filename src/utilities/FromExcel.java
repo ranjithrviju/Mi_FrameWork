@@ -3,13 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class FromExcel {
+import generic.CommonClass;
+
+public class FromExcel extends CommonClass{
 	private static Logger log=Logger.getLogger("From Excel");
 	
 	//--------------------------------------------------------------TO GET LIST OF DATA FROM EXCEL-------------------------------------------------------------------------------------------------//
 	
 	public static List<String> getDataFromExcel(String testCaseName, String sheetName) {
-		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+"\\excel\\data.xlsx");
+		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path"));
 		int totalRows = excel.getRowCount(sheetName);
 		log.info("Total Rows in the Excel File is : "+totalRows);
 

@@ -27,13 +27,13 @@ public class TestUtils extends CommonClass {
 	public static Object[][] getData(Method m) {
 		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path"));
 		String testCaseName=m.getName();
-		int totalRows = excel.getRowCount(excelPro.getProperty("sheetName"));
+		int totalRows = excel.getRowCount(excelPro.getProperty("DPsheetName"));
 
 		//----------Finding TestCase-----------//
 
 		int testCaseRow = 0;
 		for (testCaseRow = 0; testCaseRow < totalRows; testCaseRow++) {
-			String testCase = excel.getCellValue(excelPro.getProperty("sheetName"), testCaseRow, 0);
+			String testCase = excel.getCellValue(excelPro.getProperty("DPsheetName"), testCaseRow, 0);
 			if(testCase.equals(testCaseName))
 				break;
 		}
@@ -42,7 +42,7 @@ public class TestUtils extends CommonClass {
 
 		int dataRowStart=testCaseRow+2;
 		int rows=0;
-		while(!excel.getCellValue(excelPro.getProperty("sheetName"), dataRowStart+rows, 0).equals("")) {
+		while(!excel.getCellValue(excelPro.getProperty("DPsheetName"), dataRowStart+rows, 0).equals("")) {
 			rows++;
 		}
 
@@ -50,7 +50,7 @@ public class TestUtils extends CommonClass {
 
 		int dataColStart=testCaseRow+1;
 		int cols=1;
-		while(!excel.getCellValue(excelPro.getProperty("sheetName"), dataColStart, cols).equals("")) {
+		while(!excel.getCellValue(excelPro.getProperty("DPsheetName"), dataColStart, cols).equals("")) {
 			cols++;
 		}
 
@@ -61,8 +61,8 @@ public class TestUtils extends CommonClass {
 		for (int row = dataRowStart; row < dataRowStart+rows; row++) {
 			Hashtable<String, String> table = new Hashtable<String, String>();
 			for (int col = 0; col < cols; col++) {
-				String value = excel.getCellValue(excelPro.getProperty("sheetName"), row, col);
-				String column = excel.getCellValue(excelPro.getProperty("sheetName"), dataColStart, col);
+				String value = excel.getCellValue(excelPro.getProperty("DPsheetName"), row, col);
+				String column = excel.getCellValue(excelPro.getProperty("DPsheetName"), dataColStart, col);
 				table.put(column, value);
 			}
 			data[i][0]=table;
@@ -121,9 +121,9 @@ public class TestUtils extends CommonClass {
 	public static boolean isTestCaseRunnable(String sheetName, String testCaseName,ExcelUtility excel) {
 		boolean isRunnable=false;
 		String sheet=sheetName;
-		for (int i = 1; i < excel.getRowCount(sheet); i++) {
+		for (int i = 1; i <= excel.getRowCount(sheet); i++) {
 			if(excel.getCellValue(sheet, "TestCaseID", i).equalsIgnoreCase(testCaseName)) {
-				if(excel.getCellValue(sheet, "RunMode", i).equals("YES")) {
+				if(excel.getCellValue(sheet, "RunMode", i).equalsIgnoreCase("YES")) {
 					isRunnable=true;
 				}
 				else if(excel.getCellValue(sheet, "RunMode", i).equals("NO")) {

@@ -87,7 +87,7 @@ public class CommonMethods extends CommonClass{
 	
 	public void javaScriptClick(String locator) {
 		js.executeScript("arguments[0].click()", getElement(locator));
-		log.info("Clickin on "+locator);
+		log.info("Clicking on "+locator);
 		test.log(Status.INFO, "Click on "+locator);
 	}
 	

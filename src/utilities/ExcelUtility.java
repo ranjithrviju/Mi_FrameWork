@@ -41,7 +41,6 @@ public class ExcelUtility {
 		int rowCount=0;
 		try {
 			rowCount=wb.getSheet(sheetName).getLastRowNum();
-			log.info("The number of Rows : "+rowCount);
 		} catch (Exception e) {
 			log.error("Error finding rows"+e.toString());
 			e.printStackTrace();
@@ -66,7 +65,6 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING DATA FROM EXCEL------------------------------------------------------------------------------------------------------------------------//
 	
 	public String getCellValue(String sheetName, String colName,int rowNo) {
-		log.info("Getting the data from  sheet : "+sheetName+" and from column : "+colName);
 		int colNo=0;
 		String cellValue =null;
 		try {
@@ -105,7 +103,6 @@ public class ExcelUtility {
 	//-----------------------------------------------------------GETTING DATA FROM EXCEL------------------------------------------------------------------------------------------------------------------------//
 	
 	public String getCellValue(String sheetName, int rowNo,int colNo) {
-		log.info("Getting the data from  sheet : "+sheetName);
 		String cellValue =null;
 		try {
 			sheet = wb.getSheet(sheetName);
