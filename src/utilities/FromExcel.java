@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import generic.CommonClass;
 
 public class FromExcel extends CommonClass{
-	private static Logger log=Logger.getLogger("From Excel");
 	
 	//--------------------------------------------------------------TO GET LIST OF DATA FROM EXCEL-------------------------------------------------------------------------------------------------//
 	
