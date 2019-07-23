@@ -1,6 +1,11 @@
 package generic;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.math3.distribution.WeibullDistribution;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -97,5 +102,21 @@ public class CommonMethods extends CommonClass{
 		js.executeScript("arguments[0].value='"+data+"'", getElement(locator));
 		log.info("Entered "+data+" in "+locator);
 		test.log(Status.INFO, "Enter "+data+" in "+locator);
+	}
+	
+	//---------------------------------------------------------------------------------GET LIST-----------------------------------------------------------------------------------------------------------------//
+		
+	public  List<String> getList(List<WebElement> eleList ) {
+			List<String> list=new ArrayList<>();
+			for (WebElement ele : eleList) {
+				list.add(ele.getText());
+			}
+			return list;
+		}
+	
+	//---------------------------------------------------------------------------------ACCEPT ALERT-----------------------------------------------------------------------------------------------------------------//
+	
+	public Alert acceptAlert(WebDriver driver) {
+		return driver.switchTo().alert();
 	}
 }
