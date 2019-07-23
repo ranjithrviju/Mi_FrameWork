@@ -129,14 +129,16 @@ public class CommonMethods extends CommonClass{
 	
 	//---------------------------------------------------------------------------------CLICK ELEMENT FROM LIST-----------------------------------------------------------------------------------------------------------------//
 	
-	public void clickElementInList(String locator, String option) {
+	public WebElement clickElementInList(String locator, String option) {
 		List<WebElement> eles = getListOfElement(locator);
 		for (WebElement ele : eles) {
 			if(ele.getText().contains(option)) {
 				ele.click();
 				log.info("Clicked on "+option);
+				return ele;
 			}
 		}
+		return null;
 	}
 	
 }
