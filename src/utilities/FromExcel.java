@@ -13,7 +13,6 @@ public class FromExcel extends CommonClass{
 	public static List<String> getDataFromExcel(String testCaseName, String sheetName) {
 		ExcelUtility excel = new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path"));
 		int totalRows = excel.getRowCount(sheetName);
-		log.info("Total Rows in the Excel File is : "+totalRows);
 
 		//--------------------Finding TestCase----------------------------//
 
@@ -23,7 +22,6 @@ public class FromExcel extends CommonClass{
 			if(testCase.equals(testCaseName))
 				break;
 		}
-		log.info("The row number of test case "+testCaseName+" is : "+testCaseRow);
 
 		//---------------Finding number of rows in TestCase----------------//
 
@@ -32,7 +30,6 @@ public class FromExcel extends CommonClass{
 		while(!excel.getCellValue(sheetName, dataRowStart+rows, 0).equals("")) {
 			rows++;
 		}
-		log.info("Total Number of rows of data in TestCase : "+rows);
 
 		//----------------Finding number of columns in TestCase---------------------//
 
@@ -41,7 +38,6 @@ public class FromExcel extends CommonClass{
 		while(!excel.getCellValue(sheetName, dataColStart, cols).equals("")) {
 			cols++;
 		}
-		log.info("Total Number of columns in TestCase : "+cols);
 
 		//---------------------Getting the data of TestCase------------------//
 
