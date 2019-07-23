@@ -135,6 +135,7 @@ public class CommonMethods extends CommonClass{
 			if(ele.getText().contains(option)) {
 				ele.click();
 				log.info("Clicked on "+option);
+				test.info("Clicked on "+option);
 				return ele;
 			}
 		}
