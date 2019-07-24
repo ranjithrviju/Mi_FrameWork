@@ -5,6 +5,9 @@ import org.apache.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import generic.CommonClass;
 import utilities.ExcelUtility;
 import utilities.TestUtils;
@@ -27,7 +30,7 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 				result.setStatus(ITestResult.FAILURE);  
 				TestUtils.setTestResultExcel(sheetName, testName, "FAIL", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
 				TestUtils.captureScreenshot(driver, result.getMethod().getMethodName());
-				test.log(Status.FAIL, testName.toUpperCase()+" is FAILED due to :- "+result.getThrowable().toString());
+				test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase()+" FAILED", ExtentColor.RED));
 				try {
 					test.addScreenCaptureFromPath(TestUtils.screenshotPath);
 				} catch (IOException e) {
@@ -38,7 +41,7 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 			}
 		} else {
 			TestUtils.setTestResultExcel(sheetName, testName, "PASS", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
-			test.log(Status.PASS, testName.toUpperCase()+" is PASSED");
+			test.log(Status.PASS, MarkupHelper.createLabel(result.getName().toUpperCase()+" PASSED ", ExtentColor.GREEN));
 			extent.flush();     //If test passes, TestNG marks it as passed
 		}
 		return false;

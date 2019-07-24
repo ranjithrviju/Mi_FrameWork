@@ -6,6 +6,9 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+
 import generic.CommonClass;
 import utilities.ExcelUtility;
 import utilities.TestUtils;
@@ -17,7 +20,7 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 		String testName = result.getName();
 		String sheetName=testName.substring(testName.indexOf("_")+1)+"_TestCase";
 		TestUtils.setTestResultExcel(sheetName, testName, "PASS", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
-		test.log(Status.PASS, testName.toUpperCase()+" is PASSED");
+		test.log(Status.PASS, MarkupHelper.createLabel(result.getName().toUpperCase()+" PASSED ", ExtentColor.GREEN));
 		extent.flush();     
 	
 	}
@@ -42,10 +45,12 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 	public void onBeforeClass(ITestClass testClass) {
 		String testName = testClass.getName().replaceAll("testcases.", "");
 		test=extent.createTest(testName.toUpperCase());
-		String sheetName=testName.substring(testName.indexOf("_")+1)+"_TestCase";
+		String category = testName.substring(testName.indexOf("_")+1);
+		test.assignCategory(category);
+		String sheetName=category+"_TestCase";
 		if(!TestUtils.isTestCaseRunnable(sheetName, testName,new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")))) {
 			TestUtils.setTestResultExcel(sheetName, testName,"SKIP",new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
-			test.log(Status.SKIP, testName.toUpperCase()+" is SKIPPED due to RunMode is NO");
+			test.log(Status.SKIP, testName.toUpperCase()+MarkupHelper.createLabel(testName.toUpperCase()+" SKIPPED ", ExtentColor.ORANGE));
 			extent.flush();
 			throw new SkipException("Skipped the test case "+testName.toUpperCase()+" as the RunMode is No");
 		}
