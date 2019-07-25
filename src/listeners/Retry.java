@@ -4,6 +4,8 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
+
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -29,10 +31,10 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 			} else {
 				result.setStatus(ITestResult.FAILURE);  
 				TestUtils.setTestResultExcel(sheetName, testName, "FAIL", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
-				TestUtils.captureScreenshot(driver, result.getMethod().getMethodName());
-				test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase()+" FAILED", ExtentColor.RED));
+				String screenshot = TestUtils.captureScreenshot(driver, result.getName());
+//				test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase()+" FAILED", ExtentColor.RED));
 				try {
-					test.addScreenCaptureFromPath(TestUtils.screenshotPath);
+					test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase(), ExtentColor.RED).getMarkup(), MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot).build());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

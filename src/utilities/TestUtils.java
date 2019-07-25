@@ -73,18 +73,21 @@ public class TestUtils extends CommonClass {
 
 	//--------------------------------------------------------TO CAPTURE SCREENSHOT----------------------------------------------------------------------------------------------------------------------//
 
-	public static void captureScreenshot(WebDriver driver, String testCaseName) {
+	public static String captureScreenshot(WebDriver driver, String testCaseName) {
+		String src =null;
 		String date_time = new Date().toString().replaceAll(":", "_").replaceAll(" ", "_");
 		screenshotPath=System.getProperty("user.dir")+"\\resources\\ScreenShots\\"+testCaseName.toUpperCase()+date_time+".png";
 		try {
 			log.info("Capturing Screenshot");
 			TakesScreenshot ss = (TakesScreenshot) driver;
-			File srcFile = ss.getScreenshotAs(OutputType.FILE);     
+			File srcFile=ss.getScreenshotAs(OutputType.FILE);  
+			src=ss.getScreenshotAs(OutputType.BASE64); 
 			Files.copy(srcFile, new File(screenshotPath));
 		} catch (Exception e) {
 			log.error("Failed to capture Screenshot");
 			e.printStackTrace();
 		}
+		return src;
 	}
 
 	//---------------------------------------------------------SET DATA RESULT IN EXCEL-------------------------------------------------------------------------------------------------------------------//
