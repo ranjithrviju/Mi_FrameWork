@@ -2,8 +2,6 @@ package generic;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.math3.distribution.WeibullDistribution;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -124,6 +122,7 @@ public class CommonMethods extends CommonClass{
 	//---------------------------------------------------------------------------------ACCEPT ALERT-----------------------------------------------------------------------------------------------------------------//
 
 	public Alert acceptAlert(WebDriver driver) {
+		test.info("Switching to Alert");
 		return driver.switchTo().alert();
 	}
 	
