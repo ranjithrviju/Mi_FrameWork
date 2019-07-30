@@ -32,7 +32,6 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 				result.setStatus(ITestResult.FAILURE);  
 				TestUtils.setTestResultExcel(sheetName, testName, "FAIL", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
 				String screenshot = TestUtils.captureScreenshot(driver, result.getName());
-//				test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase()+" FAILED", ExtentColor.RED));
 				try {
 					test.log(Status.FAIL, MarkupHelper.createLabel(testName.toUpperCase(), ExtentColor.RED).getMarkup(), MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot).build());
 				} catch (IOException e) {
