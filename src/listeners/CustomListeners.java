@@ -8,7 +8,6 @@ import org.testng.SkipException;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-
 import generic.CommonClass;
 import utilities.ExcelUtility;
 import utilities.TestUtils;
@@ -22,13 +21,13 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 		TestUtils.setTestResultExcel(sheetName, testName, "PASS", new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
 		test.log(Status.PASS, MarkupHelper.createLabel(result.getName().toUpperCase()+" PASSED ", ExtentColor.GREEN));
 		extent.flush();     
-	
+
 	}
 
 	public void onTestFailure(ITestResult result) {
 	}
 	public void onTestSkipped(ITestResult result) {
-		
+
 	}
 
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
@@ -57,6 +56,6 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 	}
 
 	public void onAfterClass(ITestClass testClass) {
-		
+
 	}
 }
