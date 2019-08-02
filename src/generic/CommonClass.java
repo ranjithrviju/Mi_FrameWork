@@ -1,5 +1,6 @@
 package generic;
 import java.io.FileInputStream;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -11,12 +12,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import utilities.ExcelUtility;
 import utilities.TestUtils;
 
 public class CommonClass implements IConstants {
@@ -119,7 +125,7 @@ public class CommonClass implements IConstants {
 
 	@Parameters("browser")
 	@BeforeMethod
-	public static void openApplication(String browser) {
+	public static void openApplication(String browser,Method method) {
 		if(browser.equals("Chrome")) {
 			System.setProperty(chromeKey, chromePath);
 			driver=new ChromeDriver();
@@ -133,6 +139,18 @@ public class CommonClass implements IConstants {
 			log.info("Launching the "+browser+" browser");
 			test.info("Launching the "+browser+" browser");
 			driverWait=new WebDriverWait(driver, exwait);
+		}
+		String testname = method.getName();
+		System.out.println("The testname is "+testname);
+		String sheetName=testname.substring(testname.indexOf("_")+1)+"_TestCase";
+		log.info("Checking the Run Mode of TestCase "+testname);
+		if(!TestUtils.isTestCaseRunnable(sheetName, testname, new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")))) {
+			log.info("Skipping the testcase as RunMode is No and Closing the browser");
+			TestUtils.setTestResultExcel(sheetName, testname,"SKIP",new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
+			test.log(Status.SKIP, testname.toUpperCase()+MarkupHelper.createLabel(testname.toUpperCase()+" SKIPPED ", ExtentColor.ORANGE));
+			extent.flush();
+			closebrowser();
+			throw new SkipException("Skipped the test case "+testname.toUpperCase()+" as the RunMode is No");
 		}
 		driver.manage().window().maximize();
 		driver.get(config.getProperty("url"));
