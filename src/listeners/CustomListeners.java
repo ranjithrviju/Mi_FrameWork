@@ -46,13 +46,6 @@ public class CustomListeners extends CommonClass implements ITestListener, IClas
 		test=extent.createTest(testName.toUpperCase());
 		String category = testName.substring(testName.indexOf("_")+1);
 		test.assignCategory(category);
-		String sheetName=category+"_TestCase";
-		if(!TestUtils.isTestCaseRunnable(sheetName, testName,new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")))) {
-			TestUtils.setTestResultExcel(sheetName, testName,"SKIP",new ExcelUtility(System.getProperty("user.dir")+excelPro.getProperty("path")));
-			test.log(Status.SKIP, testName.toUpperCase()+MarkupHelper.createLabel(testName.toUpperCase()+" SKIPPED ", ExtentColor.ORANGE));
-			extent.flush();
-			throw new SkipException("Skipped the test case "+testName.toUpperCase()+" as the RunMode is No");
-		}
 	}
 
 	public void onAfterClass(ITestClass testClass) {
