@@ -21,7 +21,7 @@ public class Retry extends CommonClass implements IRetryAnalyzer {
 	@Override
 	public boolean retry(ITestResult result) {
 		String testName = result.getName();
-		log.info("Retryig failed test case : "+testName);
+		log.info("Retrying failed test case : "+testName);
 		String sheetName=testName.substring(testName.indexOf("_")+1)+"_TestCase";
 		if (!result.isSuccess()) {                      //Check if test not succeed
 			if (count < maxTry) {                            //Check if maxtry count is reached
